@@ -4,6 +4,11 @@ plugins {
     id 'kotlinx-serialization'
 }
 
+ext {
+    publish_group_id = "com.egenesio"
+    publish_artifact_id = "api-client"
+}
+
 android {
     compileSdkVersion 30
 
@@ -28,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "$publish_group_id.$publish_artifact_id"]
     }
 }
 
