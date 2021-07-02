@@ -1,7 +1,7 @@
 package com.egenesio.api_client.json_extension
 
-import com.egenesio.api_client.json.elem
-import com.egenesio.api_client.json.get
+import com.egenesio.api_client.util.elem
+import com.egenesio.api_client.util.get
 import kotlinx.serialization.json.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*

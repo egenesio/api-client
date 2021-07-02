@@ -1,4 +1,4 @@
-package com.egenesio.api_client.json
+package com.egenesio.api_client.util
 
 import com.egenesio.api_client.domain.APIError
 import kotlinx.coroutines.runBlocking

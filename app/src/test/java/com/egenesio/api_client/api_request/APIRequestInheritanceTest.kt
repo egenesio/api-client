@@ -1,7 +1,7 @@
 package com.egenesio.api_client.api_request
 
 import com.egenesio.api_client.domain.*
-import com.egenesio.api_client.json.get
+import com.egenesio.api_client.util.get
 import io.ktor.http.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement

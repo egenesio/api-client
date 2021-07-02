@@ -1,9 +1,8 @@
 package com.egenesio.api_client.networking
 
 import com.egenesio.api_client.domain.*
-import com.egenesio.api_client.json.decodeFrom
-import com.egenesio.api_client.json.get
-import com.egenesio.api_client.json.jsonElementFromBody
+import com.egenesio.api_client.util.decodeFrom
+import com.egenesio.api_client.util.jsonElementFromBody
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
@@ -16,7 +15,6 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonObject
 
 class APIClient(
     val ktorClient: HttpClient,

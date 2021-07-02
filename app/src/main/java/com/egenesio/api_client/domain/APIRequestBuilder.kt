@@ -1,6 +1,6 @@
 package com.egenesio.api_client.domain
 
-import com.egenesio.api_client.json.toMultipartData
+import com.egenesio.api_client.util.toMultipartData
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import io.ktor.http.content.*

@@ -1,4 +1,4 @@
-package com.egenesio.api_client.json
+package com.egenesio.api_client.util
 
 import io.ktor.client.request.forms.*
 import io.ktor.http.content.*

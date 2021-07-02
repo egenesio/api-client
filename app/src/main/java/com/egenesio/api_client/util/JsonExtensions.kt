@@ -1,4 +1,4 @@
-package com.egenesio.api_client.json
+package com.egenesio.api_client.util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -6,6 +6,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 
 /**
  * Function that gets the [JsonElement] object from the given [String]
@@ -95,6 +96,34 @@ suspend inline fun <reified T> Json.decodeNullableFrom(json: JsonElement?, key: 
 
         return@withContext json?.let { decodeFrom(it, key) }
 
+    } catch (e: Exception) {
+        e.printStackTrace()
+        // TODO check if log is enabled
+        println(e.message)
+        return@withContext null
+    }
+}
+
+/**
+ * TODO doc
+ */
+suspend inline fun <reified T> Json.encodeToJsonElementOrNull(value: T): JsonElement? = withContext(Dispatchers.Default) {
+    try {
+        return@withContext encodeToJsonElement(value)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        // TODO check if log is enabled
+        println(e.message)
+        return@withContext null
+    }
+}
+
+/**
+ * TODO doc
+ */
+suspend fun Json.parseToJsonElementOrNull(string: String): JsonElement? = withContext(Dispatchers.Default) {
+    try {
+        return@withContext parseToJsonElement(string)
     } catch (e: Exception) {
         e.printStackTrace()
         // TODO check if log is enabled
