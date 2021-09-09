@@ -1,2 +1,5 @@
 jdk:
   - openjdk11
+
+install:
+  ./gradlew build :app:publishReleasePublicationToMavenLocal -x test

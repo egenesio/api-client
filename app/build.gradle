@@ -2,11 +2,22 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlinx-serialization'
+    id 'maven-publish'
 }
 
 ext {
     publish_group_id = "com.egenesio"
     publish_artifact_id = "api-client"
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
+        }
+    }
 }
 
 android {
@@ -16,7 +27,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 5
-        versionName "0.1.1"
+        versionName "0.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
