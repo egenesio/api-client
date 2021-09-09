@@ -16,7 +16,6 @@
 .idea/
 
 local.properties
-gradle.properties
 app/src/test/java/com/egenesio/api_client/api_client_check
 app/src/test/java/com/egenesio/api_client/api_client_gb
 app/src/test/java/com/egenesio/api_client/api_client_gb_auth
