@@ -19,7 +19,29 @@ class APIRequestBuilderTest {
 
     // TODO test files
 
+    private val _host = "this_is_the_host"
+    private val _protocol = URLProtocol.HTTP
     private val _path = "this_is_the_path"
+
+    @Test
+    fun `requesBuilder custom host`() {
+        val request = ApiRequest {
+            host = _host
+            protocol = _protocol
+        }
+
+        println(request)
+
+        assertEquals(_host, request.requestHost)
+        assertEquals(_protocol, request.requestProtocol)
+        assertEquals(HttpMethod.Get, request.httpMethod)
+        assertNull(request.apiVersion)
+        assertEquals(false, request.isPrivate)
+        assertEquals(mapOf<String,Any>(), request.pathParams)
+        assertEquals(mapOf<String,Any>(), request.queryParams)
+        assertNull(request.body)
+        assertNull(request.rawBody)
+    }
 
     @Test
     fun requesBuilder_path() {

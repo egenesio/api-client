@@ -19,8 +19,12 @@ class APIRequestBuilderFromAPIRequestTest {
     // TODO test files
 
     val _path = "overrided_path"
+    private val _host = "this_is_the_host"
+    private val _protocol = URLProtocol.HTTP
 
     object RequestPath: APIRequest() {
+        override val requestHost: String = "this_is_the_host"
+        override val requestProtocol: URLProtocol = URLProtocol.HTTP
         override val path = "overrided_path"
     }
 
@@ -37,6 +41,8 @@ class APIRequestBuilderFromAPIRequestTest {
 
         println(request)
 
+        assertEquals(_host, request.requestHost)
+        assertEquals(_protocol, request.requestProtocol)
         assertEquals(_path, request.path)
         assertEquals(HttpMethod.Get, request.httpMethod)
         assertNull(request.apiVersion)

@@ -29,6 +29,10 @@ class APIRequestBuilder {
     private var filesBuilder: FilesBuilder = FilesBuilder()
     var multiPartData: List<PartData> = listOf()
 
+    // used only to override the default host and protocol
+    var host: String? = null
+    var protocol: URLProtocol = URLProtocol.HTTPS
+
     /**
      * TODO
      */
@@ -72,6 +76,8 @@ class APIRequestBuilder {
      * TODO
      */
     fun build() = APIRequest(
+        requestHost = this.host,
+        requestProtocol = this.protocol,
         path = this.path,
         httpMethod = this.method,
         apiVersion = this.apiVersion,
@@ -105,6 +111,9 @@ class APIRequestBuilder {
         rawBody = apiRequest.rawBody
 
         multiPartData = apiRequest.multiPartData
+
+        host = apiRequest.requestHost
+        protocol = apiRequest.requestProtocol
     }
 
 

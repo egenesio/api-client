@@ -11,6 +11,8 @@ import kotlinx.serialization.json.*
  * TODO
  */
 open class APIRequest(
+    open val requestHost: String? = null,
+    open val requestProtocol: URLProtocol = URLProtocol.HTTPS,
     open val path: String = "",
     open val httpMethod: HttpMethod = HttpMethod.Get,
     open val apiVersion: APIVersion? = null,
@@ -65,9 +67,21 @@ open class APIRequest(
      * TODO
      */
     open fun httpRequest(): HttpRequestBuilder = HttpRequestBuilder().apply {
-        url {
-            encodedPath = requestPath
+        // if the request has a custom host
+        requestHost?.let { requestHost ->
+            url {
+                host = requestHost
+                protocol = requestProtocol
+                encodedPath = requestPath
+            }
+
+        // if the request does not have a custom host, then use defualt one
+        } ?: run {
+            url {
+                encodedPath = requestPath
+            }
         }
+
         method = httpMethod
         queryParams.forEach { param -> parameter(param.key, param.value) }
 
