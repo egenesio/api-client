@@ -29,6 +29,7 @@ class APIClientBuilder {
     private val headers = HeadersBuilder()
     private var auth: (Auth.() -> Unit)? = null
     private var url: URLBuilder.(URLBuilder) -> Unit = {}
+    private var timeoutContiguration: (HttpTimeout.HttpTimeoutCapabilityConfiguration.() -> Unit)? = null
 
     /**
      * TODO add
@@ -60,6 +61,10 @@ class APIClientBuilder {
 
     public fun headers(block: HeadersBuilder.() -> Unit) = headers.apply(block)
 
+    public fun timeout(block: HttpTimeout.HttpTimeoutCapabilityConfiguration.() -> Unit) {
+        this.timeoutContiguration = block
+    }
+
     private val clientLogger by lazy {
         object : Logger {
             override fun log(message: String) = println(message)
@@ -82,6 +87,10 @@ class APIClientBuilder {
             install(Logging) {
                 logger = clientLogger
                 level = logLevel.ktorLogLevel
+            }
+
+            timeoutContiguration?.let { configuration ->
+                install(HttpTimeout, configure = configuration)
             }
 
             if (authBlock != null) {
