@@ -1,6 +1,7 @@
 package com.egenesio.api_client.domain
 
 import com.egenesio.api_client.util.toMultipartData
+import io.ktor.client.features.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import io.ktor.http.content.*
@@ -32,6 +33,7 @@ class APIRequestBuilder {
     // used only to override the default host and protocol
     var host: String? = null
     var protocol: URLProtocol = URLProtocol.HTTPS
+    var timeoutContiguration: (HttpTimeout.HttpTimeoutCapabilityConfiguration.() -> Unit)? = null
 
     /**
      * TODO
@@ -89,6 +91,7 @@ class APIRequestBuilder {
         body = this.body,
         rawBody = this.rawBody,
         multiPartData =  this.multiPartData + this.filesBuilder.build(),
+        timeoutContiguration = this.timeoutContiguration,
         )
 
     /**
@@ -168,6 +171,10 @@ class APIRequestBuilder {
      */
     fun multiPartBody(body: JsonElement) {
         multiPartData = body.toMultipartData()
+    }
+
+    fun timeout(block: HttpTimeout.HttpTimeoutCapabilityConfiguration.() -> Unit) {
+        timeoutContiguration = block
     }
 
     /**

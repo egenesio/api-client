@@ -1,5 +1,6 @@
 package com.egenesio.api_client.domain
 
+import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
@@ -26,7 +27,8 @@ open class APIRequest(
     open val body: Any? = null,
     open val rawBody: JsonElement? = null,
 
-    open val multiPartData: List<PartData> = listOf()
+    open val multiPartData: List<PartData> = listOf(),
+    open val timeoutContiguration: (HttpTimeout.HttpTimeoutCapabilityConfiguration.() -> Unit)? = null,
     ) {
 
     // TODO add support for attributes
@@ -91,6 +93,10 @@ open class APIRequest(
 
         headers {
             appendAll(requestHeaders)
+        }
+
+        timeoutContiguration?.let {
+            timeout(it)
         }
 
         when(requestType) {
